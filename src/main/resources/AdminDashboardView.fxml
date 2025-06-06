@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<!-- BorderPane es ideal para layouts que tienen secciones fijas como top, bottom, left, right, y un centro cambiante. -->
+<?import javafx.geometry.Insets?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cerrajeria.app.ui.controllers.AdminDashboardController">
+   <left>
+      <!-- VBox para el menú lateral (navegación). -->
+      <VBox prefWidth="200.0" style="-fx-background-color: #333333;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="60.0" prefWidth="200.0" text="Menú AD" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Separator prefWidth="200.0" />
+            <!-- Botones de navegación. Cada uno tendrá su propio handler en el controlador. -->
+            <Button fx:id="btnProductos" mnemonicParsing="false" onAction="#handleProductsSection" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Gestión de Productos" />
+            <Button fx:id="btnServicios" mnemonicParsing="false" onAction="#handleServicesSection" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Gestión de Servicios" />
+            <Button fx:id="btnUsuarios" mnemonicParsing="false" onAction="#handleUsersSection" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Gestión de Usuarios" />
+            <Button fx:id="btnVentas" mnemonicParsing="false" onAction="#handleSalesSection" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Registro de Ventas" />
+            <Button fx:id="btnComisiones" mnemonicParsing="false" onAction="#handleCommissionsSection" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Gestión de Comisiones" />
+            <Button fx:id="btnFinanciero" mnemonicParsing="false" onAction="#handleFinancialSection" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Control Financiero" />
+            <Button fx:id="btnReportes" mnemonicParsing="false" onAction="#handleReportsSection" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Reportes Globales" />
+            <Pane VBox.vgrow="ALWAYS" /> <!-- Un Pane para empujar el botón de logout al final -->
+            <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#handleLogout" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #dc3545; -fx-text-fill: white;" text="Cerrar Sesión" />
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <!-- StackPane para cambiar dinámicamente el contenido principal. -->
+      <!-- Aquí se cargarán las diferentes vistas de gestión (productos, servicios, etc.). -->
+      <StackPane fx:id="contentArea" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Bienvenido, Administrador" alignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+   </center>
+   <top>
+       <!-- Barra superior para el título de la aplicación o mensajes. -->
+       <HBox alignment="CENTER_LEFT" prefHeight="60.0" style="-fx-background-color: #1a1a1a;">
+           <Label text="Panel de Administración" textFill="WHITE" style="-fx-font-size: 24px; -fx-font-weight: bold;">
+               <HBox.margin>
+                   <Insets left="20.0" />
+               </HBox.margin>
+           </Label>
+       </HBox>
+   </top>
+</BorderPane>

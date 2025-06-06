@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<!-- VBox como contenedor principal para organizar los elementos verticalmente. -->
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cerrajeria.app.ui.controllers.LoginController">
+    <!-- Relleno alrededor del VBox para un mejor espaciado. -->
+    <padding>
+        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+    </padding>
+
+    <!-- Título principal de la aplicación. -->
+    <Label text="Bienvenido a CerrajeriaApp">
+        <font>
+            <Font name="System Bold" size="24.0" />
+        </font>
+    </Label>
+
+    <!-- Título de la sección de Login. -->
+    <Label text="Login">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Label>
+
+    <!-- GridPane para organizar los campos de entrada en dos columnas (etiqueta y campo). -->
+    <GridPane hgap="10.0" vgap="10.0">
+        <!-- Definición de las columnas: la primera para etiquetas, la segunda para campos. -->
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="100.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="150.0" prefWidth="200.0" />
+        </columnConstraints>
+        <!-- Definición de las filas para cada par etiqueta-campo. -->
+        <rowConstraints>
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+        </rowConstraints>
+        <children>
+            <!-- Etiqueta para el campo de código de usuario. -->
+            <Label text="Código de Usuario:" GridPane.rowIndex="0" />
+            <!-- Campo de texto para que el usuario ingrese su código. -->
+            <TextField fx:id="codigoField" promptText="AD0001 o VD0001" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+            <!-- Etiqueta para el campo de contraseña. -->
+            <Label text="Contraseña:" GridPane.rowIndex="1" />
+            <!-- Campo de contraseña para entrada segura. -->
+            <PasswordField fx:id="contrasenaField" promptText="Tu contraseña" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        </children>
+    </GridPane>
+
+    <!-- Botón para iniciar sesión. El onAction apunta a un método en el controlador. -->
+    <Button fx:id="loginButton" onAction="#handleLoginButton" text="Iniciar Sesión" />
+
+    <!-- Etiqueta para mostrar mensajes de error al usuario. Inicialmente oculta. -->
+    <Label fx:id="mensajeError" textFill="red" wrapText="true" visible="false">
+        <font>
+            <Font size="12.0" />
+        </font>
+    </Label>
+</VBox>
