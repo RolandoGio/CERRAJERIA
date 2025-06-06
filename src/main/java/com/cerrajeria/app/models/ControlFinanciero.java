@@ -1,11 +1,11 @@
 package com.cerrajeria.app.models;
 
-import java.math.BigDecimal; // Para manejar el monto con precisión
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
  * Clase modelo que representa un registro de control financiero en la tabla 'control_financiero'.
- * Mapea las columnas de la base de datos a atributos Java.
+ * Mapea las columnas de la base de datos a atributos Java, incluyendo el costo si aplica.
  */
 public class ControlFinanciero {
 
@@ -13,16 +13,19 @@ public class ControlFinanciero {
     private String tipo; // 'Ingreso' o 'Egreso'
     private String descripcion;
     private BigDecimal monto;
+    private BigDecimal costo; // Nuevo campo para reflejar el costo
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaActualizacion;
 
     // Constructor completo
     public ControlFinanciero(int idControlFinanciero, String tipo, String descripcion,
-                             BigDecimal monto, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion) {
+                             BigDecimal monto, BigDecimal costo,
+                             LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion) {
         this.idControlFinanciero = idControlFinanciero;
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.monto = monto;
+        this.costo = costo;
         this.fechaCreacion = fechaCreacion;
         this.fechaActualizacion = fechaActualizacion;
     }
@@ -32,6 +35,7 @@ public class ControlFinanciero {
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.monto = monto;
+        this.costo = BigDecimal.ZERO; // Inicializar costo en cero por defecto
     }
 
     // --- Getters y Setters ---
@@ -67,6 +71,14 @@ public class ControlFinanciero {
         this.monto = monto;
     }
 
+    public BigDecimal getCosto() {
+        return costo;
+    }
+
+    public void setCosto(BigDecimal costo) {
+        this.costo = costo;
+    }
+
     public LocalDateTime getFechaCreacion() {
         return fechaCreacion;
     }
@@ -90,6 +102,9 @@ public class ControlFinanciero {
                 ", tipo='" + tipo + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", monto=" + monto +
+                ", costo=" + costo +
+                ", fechaCreacion=" + fechaCreacion +
+                ", fechaActualizacion=" + fechaActualizacion +
                 '}';
     }
 }

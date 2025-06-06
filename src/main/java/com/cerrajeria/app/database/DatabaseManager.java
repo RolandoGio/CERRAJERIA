@@ -218,7 +218,7 @@ public class DatabaseManager {
                 // =========================================================================
                 // --- PRUEBAS DE COMISION SERVICE (SOLO LECTURA) ---
                 // =========================================================================
-                System.out.println("\n\n--- INICIANDO PRUEBAS DE COMISION SERVICE (SOLO LECTURA) ---");
+              /*  System.out.println("\n\n--- INICIANDO PRUEBAS DE COMISION SERVICE (SOLO LECTURA) ---");
                 ComisionService comisionService = new ComisionService();
 
                 System.out.println("\n--- Listando TODAS las comisiones ---");
@@ -238,7 +238,7 @@ public class DatabaseManager {
                 System.out.println("\n--- Listando comisiones con estado 'Pendiente' ---");
                 comisionService.getComisionesByEstado("Pendiente").forEach(System.out::println);
                 System.out.println("\n--- Fin de pruebas de ComisionService ---");
-
+*/
 
                 // =========================================================================
                 // --- PRUEBAS DE CONTROL FINANCIERO SERVICE (SOLO LECTURA) ---
@@ -298,13 +298,8 @@ public class DatabaseManager {
                 System.out.println("\n--- Reporte: Todas las Ventas ---");
                 reporteService.obtenerTodasLasVentasFiltradas(null, null, null).forEach(System.out::println);
 
-                System.out.println("\n--- Reporte: Ventas de 'Ronal Rivera' (VD0001) ---");
-                Usuario ronalRivera = usuarioDAO.obtenerUsuarioPorNombreUsuario("RG");
-                if (ronalRivera != null) {
-                    reporteService.obtenerTodasLasVentasFiltradas(null, null, ronalRivera.getIdUsuario()).forEach(System.out::println);
-                } else {
-                    System.out.println("Usuario 'Ronal Rivera' no encontrado para reporte de ventas.");
-                }
+
+
 
                 System.out.println("\n--- Reporte: Todas las Comisiones ---");
                 reporteService.obtenerTodasLasComisionesFiltradas(null, null).forEach(System.out::println);
@@ -313,23 +308,7 @@ public class DatabaseManager {
                 reporteService.obtenerTodasLasComisionesFiltradas(null, "Pendiente").forEach(System.out::println);
 
 
-                System.out.println("\n--- Reporte: Historial Detallado de 'Ronal Rivera' (Vendedor) ---");
-                if (ronalRivera != null) {
-                    Map<String, List<?>> historialVendedor = reporteService.obtenerHistorialVendedor(ronalRivera.getIdUsuario());
-                    System.out.println("Ventas de Ronal Rivera:");
-                    historialVendedor.get("ventas").forEach(item -> {
-                        System.out.println("  " + item);
-                        // Opcional: Obtener y mostrar detalles de cada venta aquí
-                        // List<DetalleVentaProducto> prods = new DetalleVentaProductoDAO().obtenerDetallesPorVenta(((Venta)item).getIdVenta());
-                        // List<DetalleVentaServicio> servs = new DetalleVentaServicioDAO().obtenerDetallesPorVenta(((Venta)item).getIdVenta());
-                        // System.out.println("    Productos: " + prods);
-                        // System.out.println("    Servicios: " + servs);
-                    });
-                    System.out.println("Comisiones de Ronal Rivera:");
-                    historialVendedor.get("comisiones").forEach(item -> System.out.println("  " + item));
-                } else {
-                    System.out.println("Usuario 'Ronal Rivera' no encontrado para historial detallado.");
-                }
+
 
 
                 System.out.println("\n--- Reporte: Productos Más Vendidos (Top 3) ---");

@@ -84,4 +84,16 @@ public class Venta {
                 ", totalVenta=" + totalVenta +
                 '}';
     }
+
+
+    private String nombreUsuario; // Nombre legible del usuario que realizó la venta
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
 }

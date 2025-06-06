@@ -4,6 +4,7 @@ import com.cerrajeria.app.dao.ControlFinancieroDAO;
 import com.cerrajeria.app.models.ControlFinanciero;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -143,4 +144,19 @@ public class ControlFinancieroService {
     public BigDecimal calcularBalanceTotal() {
         return calcularTotalIngresos().subtract(calcularTotalEgresos());
     }
+
+    /**
+     * Obtiene los registros financieros filtrados por periodo (día, semana, mes, trimestre, año).
+     * @param date Fecha de referencia.
+     * @param tipoFiltro Tipo de filtro: "Día", "Semana", "Mes", "Trimestre" o "Año".
+     * @return Lista filtrada.
+     */
+    public List<ControlFinanciero> obtenerRegistrosPorPeriodo(LocalDate date, String tipoFiltro) {
+        if (date == null || tipoFiltro == null) {
+            throw new IllegalArgumentException("La fecha y el tipo de filtro son obligatorios.");
+        }
+
+        return controlFinancieroDAO.obtenerRegistrosPorPeriodo(date, tipoFiltro);
+    }
+
 }

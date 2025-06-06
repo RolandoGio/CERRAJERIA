@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.cerrajeria.app.ui.controllers.CommissionCreationModalController"
+      alignment="CENTER" spacing="15.0"
+      prefHeight="450.0" prefWidth="400.0">
+
+    <padding>
+        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+    </padding>
+
+    <children>
+        <Label text="Crear Comisión Manual">
+            <font><Font name="System Bold" size="20.0"/></font>
+        </Label>
+
+        <GridPane hgap="10.0" vgap="10.0">
+            <columnConstraints>
+                <ColumnConstraints prefWidth="120.0"/>
+                <ColumnConstraints prefWidth="200.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints prefHeight="30.0"/>
+                <RowConstraints prefHeight="30.0"/>
+                <RowConstraints prefHeight="30.0"/>
+                <RowConstraints prefHeight="60.0"/>
+                <RowConstraints prefHeight="60.0"/> <!-- Fila para comentarioAdmin -->
+            </rowConstraints>
+
+            <children>
+                <Label text="Usuario:" GridPane.rowIndex="0"/>
+                <ComboBox fx:id="userCombo"
+                          prefWidth="200.0"
+                          GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Label text="Monto:" GridPane.rowIndex="1"/>
+                <TextField fx:id="montoField"
+                           promptText="0.00"
+                           GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                <Label text="ID Venta:" GridPane.rowIndex="2"/>
+                <TextField fx:id="ventaIdField"
+                           promptText="Opcional"
+                           GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                <Label text="Comentario:" GridPane.rowIndex="3"/>
+                <TextArea fx:id="comentarioArea"
+                          prefRowCount="2"
+                          GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                <Label text="Comentario AD:" GridPane.rowIndex="4"/>
+                <TextArea fx:id="comentarioAdminArea"
+                          prefRowCount="2"
+                          GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+            </children>
+        </GridPane>
+
+        <Label fx:id="formMessageLabel" textFill="RED" wrapText="true" visible="false"/>
+
+        <HBox alignment="CENTER" spacing="10.0">
+            <children>
+                <Button fx:id="saveButton" text="Guardar" onAction="#handleSave"/>
+                <Button fx:id="cancelButton" text="Cancelar" onAction="#handleCancel"/>
+            </children>
+        </HBox>
+    </children>
+</VBox>

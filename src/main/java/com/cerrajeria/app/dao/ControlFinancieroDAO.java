@@ -5,22 +5,18 @@ import com.cerrajeria.app.models.ControlFinanciero;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Clase DAO (Data Access Object) para interactuar con la tabla 'control_financiero' en la base de datos.
+ * DAO para interactuar con la tabla 'control_financiero' en la base de datos.
  */
 public class ControlFinancieroDAO {
 
-    /**
-     * Inserta un nuevo registro de control financiero.
-     * @param registro El objeto ControlFinanciero a insertar.
-     * @return El ID del registro recién insertado, o -1 si hubo un error.
-     */
     public int insertarControlFinanciero(ControlFinanciero registro) {
-        String sql = "INSERT INTO control_financiero (tipo, descripcion, monto) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO control_financiero (tipo, descripcion, monto, costo) VALUES (?, ?, ?, ?)";
         int idGenerado = -1;
 
         try (Connection conn = DatabaseManager.getConnection();
@@ -29,6 +25,7 @@ public class ControlFinancieroDAO {
             pstmt.setString(1, registro.getTipo());
             pstmt.setString(2, registro.getDescripcion());
             pstmt.setBigDecimal(3, registro.getMonto());
+            pstmt.setBigDecimal(4, registro.getCosto() != null ? registro.getCosto() : BigDecimal.ZERO);
 
             int filasAfectadas = pstmt.executeUpdate();
 
@@ -36,7 +33,7 @@ public class ControlFinancieroDAO {
                 try (ResultSet rs = pstmt.getGeneratedKeys()) {
                     if (rs.next()) {
                         idGenerado = rs.getInt(1);
-                        registro.setIdControlFinanciero(idGenerado); // Actualiza el objeto
+                        registro.setIdControlFinanciero(idGenerado);
                         System.out.println("Registro financiero insertado con ID: " + idGenerado);
                     }
                 }
@@ -47,13 +44,8 @@ public class ControlFinancieroDAO {
         return idGenerado;
     }
 
-    /**
-     * Obtiene un registro de control financiero por su ID.
-     * @param idRegistro El ID del registro a buscar.
-     * @return El objeto ControlFinanciero si se encuentra, o null.
-     */
     public ControlFinanciero obtenerControlFinancieroPorId(int idRegistro) {
-        String sql = "SELECT id_control_financiero, tipo, descripcion, monto, fecha_creacion, fecha_actualizacion FROM control_financiero WHERE id_control_financiero = ?";
+        String sql = "SELECT * FROM control_financiero WHERE id_control_financiero = ?";
         ControlFinanciero registro = null;
 
         try (Connection conn = DatabaseManager.getConnection();
@@ -72,13 +64,8 @@ public class ControlFinancieroDAO {
         return registro;
     }
 
-    /**
-     * Obtiene una lista de registros de control financiero por tipo ('Ingreso' o 'Egreso').
-     * @param tipo El tipo de registro a buscar.
-     * @return Una lista de objetos ControlFinanciero.
-     */
     public List<ControlFinanciero> obtenerControlFinancieroPorTipo(String tipo) {
-        String sql = "SELECT id_control_financiero, tipo, descripcion, monto, fecha_creacion, fecha_actualizacion FROM control_financiero WHERE tipo = ? ORDER BY fecha_creacion DESC";
+        String sql = "SELECT * FROM control_financiero WHERE tipo = ? ORDER BY fecha_creacion DESC";
         List<ControlFinanciero> registros = new ArrayList<>();
 
         try (Connection conn = DatabaseManager.getConnection();
@@ -97,12 +84,8 @@ public class ControlFinancieroDAO {
         return registros;
     }
 
-    /**
-     * Obtiene una lista de todos los registros de control financiero.
-     * @return Una lista de objetos ControlFinanciero.
-     */
     public List<ControlFinanciero> obtenerTodosLosRegistrosFinancieros() {
-        String sql = "SELECT id_control_financiero, tipo, descripcion, monto, fecha_creacion, fecha_actualizacion FROM control_financiero ORDER BY fecha_creacion DESC";
+        String sql = "SELECT * FROM control_financiero ORDER BY fecha_creacion DESC";
         List<ControlFinanciero> registros = new ArrayList<>();
 
         try (Connection conn = DatabaseManager.getConnection();
@@ -118,13 +101,8 @@ public class ControlFinancieroDAO {
         return registros;
     }
 
-    /**
-     * Actualiza los datos de un registro de control financiero existente.
-     * @param registro El objeto ControlFinanciero con los datos actualizados.
-     * @return true si la actualización fue exitosa, false en caso contrario.
-     */
     public boolean actualizarControlFinanciero(ControlFinanciero registro) {
-        String sql = "UPDATE control_financiero SET tipo = ?, descripcion = ?, monto = ?, fecha_actualizacion = GETDATE() WHERE id_control_financiero = ?";
+        String sql = "UPDATE control_financiero SET tipo = ?, descripcion = ?, monto = ?, costo = ?, fecha_actualizacion = GETDATE() WHERE id_control_financiero = ?";
 
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -132,47 +110,39 @@ public class ControlFinancieroDAO {
             pstmt.setString(1, registro.getTipo());
             pstmt.setString(2, registro.getDescripcion());
             pstmt.setBigDecimal(3, registro.getMonto());
-            pstmt.setInt(4, registro.getIdControlFinanciero());
+            pstmt.setBigDecimal(4, registro.getCosto() != null ? registro.getCosto() : BigDecimal.ZERO);
+            pstmt.setInt(5, registro.getIdControlFinanciero());
 
             int filasAfectadas = pstmt.executeUpdate();
-            System.out.println("Filas afectadas al actualizar registro financiero: " + filasAfectadas);
+            System.out.println("Filas afectadas al actualizar: " + filasAfectadas);
             return filasAfectadas > 0;
         } catch (SQLException e) {
-            System.err.println("Error al actualizar registro financiero: " + e.getMessage());
+            System.err.println("Error al actualizar: " + e.getMessage());
             return false;
         }
     }
 
-    /**
-     * Elimina un registro de control financiero.
-     * @param idRegistro El ID del registro a eliminar.
-     * @return true si la eliminación fue exitosa, false en caso contrario.
-     */
     public boolean eliminarControlFinanciero(int idRegistro) {
         String sql = "DELETE FROM control_financiero WHERE id_control_financiero = ?";
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
             pstmt.setInt(1, idRegistro);
             int filasAfectadas = pstmt.executeUpdate();
-            System.out.println("Registro financiero con ID " + idRegistro + " eliminado.");
+            System.out.println("Registro eliminado: ID " + idRegistro);
             return filasAfectadas > 0;
         } catch (SQLException e) {
-            System.err.println("Error al eliminar registro financiero: " + e.getMessage());
+            System.err.println("Error al eliminar: " + e.getMessage());
             return false;
         }
     }
 
-    /**
-     * Método auxiliar para mapear un ResultSet a un objeto ControlFinanciero.
-     * @param rs El ResultSet actual.
-     * @return Un objeto ControlFinanciero con los datos del ResultSet.
-     * @throws SQLException Si ocurre un error al acceder a los datos del ResultSet.
-     */
     private ControlFinanciero mapearResultSetAControlFinanciero(ResultSet rs) throws SQLException {
         int id = rs.getInt("id_control_financiero");
         String tipo = rs.getString("tipo");
         String descripcion = rs.getString("descripcion");
         BigDecimal monto = rs.getBigDecimal("monto");
+        BigDecimal costo = rs.getBigDecimal("costo");
 
         Timestamp tsCreacion = rs.getTimestamp("fecha_creacion");
         LocalDateTime fechaCreacion = (tsCreacion != null) ? tsCreacion.toLocalDateTime() : null;
@@ -180,6 +150,50 @@ public class ControlFinancieroDAO {
         Timestamp tsActualizacion = rs.getTimestamp("fecha_actualizacion");
         LocalDateTime fechaActualizacion = (tsActualizacion != null) ? tsActualizacion.toLocalDateTime() : null;
 
-        return new ControlFinanciero(id, tipo, descripcion, monto, fechaCreacion, fechaActualizacion);
+        return new ControlFinanciero(id, tipo, descripcion, monto, costo, fechaCreacion, fechaActualizacion);
+    }
+
+    public List<ControlFinanciero> obtenerRegistrosPorPeriodo(LocalDate date, String tipoFiltro) {
+        List<ControlFinanciero> lista = new ArrayList<>();
+        String sql = "SELECT * FROM control_financiero WHERE ";
+
+        switch (tipoFiltro) {
+            case "Día":
+                sql += "CONVERT(DATE, fecha_creacion) = ?";
+                break;
+            case "Semana":
+                sql += "DATEPART(YEAR, fecha_creacion) = YEAR(?) AND DATEPART(WEEK, fecha_creacion) = DATEPART(WEEK, ?)";
+                break;
+            case "Mes":
+                sql += "YEAR(fecha_creacion) = YEAR(?) AND MONTH(fecha_creacion) = MONTH(?)";
+                break;
+            case "Trimestre":
+                sql += "YEAR(fecha_creacion) = YEAR(?) AND DATEPART(QUARTER, fecha_creacion) = DATEPART(QUARTER, ?)";
+                break;
+            case "Año":
+                sql += "YEAR(fecha_creacion) = YEAR(?)";
+                break;
+            default:
+                throw new IllegalArgumentException("Tipo de filtro inválido: " + tipoFiltro);
+        }
+
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setDate(1, Date.valueOf(date));
+            if (!tipoFiltro.equals("Año")) {
+                pstmt.setDate(2, Date.valueOf(date));
+            }
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(mapearResultSetAControlFinanciero(rs));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al filtrar registros: " + e.getMessage());
+        }
+
+        return lista;
     }
 }

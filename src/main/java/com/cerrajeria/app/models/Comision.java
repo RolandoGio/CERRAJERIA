@@ -154,4 +154,15 @@ public class Comision {
                 ", comentarioAdmin='" + comentarioAdmin + '\'' +
                 '}';
     }
+
+    private String nombreUsuario; // Nombre legible del usuario
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
 }
