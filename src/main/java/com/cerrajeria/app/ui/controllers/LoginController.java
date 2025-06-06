@@ -1,6 +1,7 @@
 package com.cerrajeria.app.ui.controllers;
 
 import com.cerrajeria.app.MainApplication;
+import com.cerrajeria.app.SessionManager;
 import com.cerrajeria.app.models.Usuario;
 import com.cerrajeria.app.services.UsuarioService;
 
@@ -28,7 +29,7 @@ public class LoginController {
     @FXML
     private Label mensajeError;
 
-    private UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
 
     /**
      * Constructor del controlador.
@@ -68,6 +69,9 @@ public class LoginController {
 
         if (usuarioAutenticado != null) {
             System.out.println("Login exitoso! Usuario: " + usuarioAutenticado.getNombreUsuario() + ", Rol: " + usuarioAutenticado.getRol());
+            // Guardar el usuario en la sesión
+            SessionManager.setUsuarioActual(usuarioAutenticado);
+
             try {
                 if ("Administrador".equalsIgnoreCase(usuarioAutenticado.getRol())) {
                     MainApplication.showAdminDashboard();

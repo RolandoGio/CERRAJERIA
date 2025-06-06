@@ -52,7 +52,7 @@ public class MainApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("/LoginView.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         primaryStage.setScene(scene);
-        //primaryStage.setTitle("7LLAVES ADP - Inicio de Sesión"); // Opcional: un título específico para el login
+        primaryStage.setTitle("7LLAVES  - Inicio de Sesión"); // Opcional: un título específico para el login
         primaryStage.show();
         primaryStage.centerOnScreen();
     }
@@ -79,12 +79,12 @@ public class MainApplication extends Application {
      */
     public static void showVendedorDashboard() throws IOException {
         System.out.println("Navegando al Dashboard del Vendedor... (Falta implementación de la vista)");
-        // Cuando implementes esta vista, el FXML podría estar en:
-        // FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("/VendedorDashboardView.fxml"));
-        // Scene scene = new Scene(fxmlLoader.load());
-        // primaryStage.setScene(scene);
-        // primaryStage.show();
-        // primaryStage.centerOnScreen();
+         //Cuando implementes esta vista, el FXML podría estar en:
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("/VendedorDashboardView.fxml"));
+         Scene scene = new Scene(fxmlLoader.load());
+         primaryStage.setScene(scene);
+        primaryStage.show();
+         primaryStage.centerOnScreen();
     }
 
     /**

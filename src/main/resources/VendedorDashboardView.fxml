@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cerrajeria.app.ui.controllers.VendedorDashboardController">
+    <left>
+        <VBox prefWidth="200.0" style="-fx-background-color: #333333;" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" prefHeight="60.0" prefWidth="200.0" text="Menú VD" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Label>
+                <Separator prefWidth="200.0" />
+                <Button mnemonicParsing="false" onAction="#handleSalesSection" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Registro de Ventas" />
+                <Button mnemonicParsing="false" onAction="#handleCommissionsSection" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Mis Comisiones" />
+                <Button mnemonicParsing="false" onAction="#handleReportsSection" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Mi Reporte" />
+                <Pane VBox.vgrow="ALWAYS" />
+                <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #dc3545; -fx-text-fill: white;" text="Cerrar Sesión" />
+            </children>
+        </VBox>
+    </left>
+    <center>
+        <StackPane fx:id="contentArea" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="Bienvenido, Vendedor" alignment="CENTER">
+                    <font>
+                        <Font size="30.0" />
+                    </font>
+                </Label>
+            </children>
+        </StackPane>
+    </center>
+    <top>
+        <HBox alignment="CENTER_LEFT" prefHeight="60.0" style="-fx-background-color: #1a1a1a;">
+            <Label text="Panel de Ventas" textFill="WHITE" style="-fx-font-size: 24px; -fx-font-weight: bold;">
+                <HBox.margin>
+                    <Insets left="20.0" />
+                </HBox.margin>
+            </Label>
+        </HBox>
+    </top>
+</BorderPane>
