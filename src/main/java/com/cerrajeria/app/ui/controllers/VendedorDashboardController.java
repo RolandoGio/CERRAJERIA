@@ -53,6 +53,19 @@ public class VendedorDashboardController {
         }
     }
 
+    @FXML
+    private void handleViewProductsSection(ActionEvent event) {
+        System.out.println("Navegando a Vista de Productos...");
+        loadFXMLIntoContentArea("/VendedorProductsView.fxml");
+    }
+
+    @FXML
+    private void handleViewServicesSection(ActionEvent event) {
+        System.out.println("Navegando a Vista de Servicios...");
+        loadFXMLIntoContentArea("/VendedorServicesView.fxml");
+    }
+
+
     private void loadFXMLIntoContentArea(String fxmlPath) {
         try {
             Node node = FXMLLoader.load(getClass().getResource(fxmlPath));

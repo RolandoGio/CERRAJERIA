@@ -18,6 +18,8 @@
                 <Button mnemonicParsing="false" onAction="#handleSalesSection" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Registro de Ventas" />
                 <Button mnemonicParsing="false" onAction="#handleCommissionsSection" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Mis Comisiones" />
                 <Button mnemonicParsing="false" onAction="#handleReportsSection" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Mi Reporte" />
+                <Button mnemonicParsing="false" onAction="#handleViewProductsSection" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Ver Productos" />
+                <Button mnemonicParsing="false" onAction="#handleViewServicesSection" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Ver Servicios" />
                 <Pane VBox.vgrow="ALWAYS" />
                 <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #dc3545; -fx-text-fill: white;" text="Cerrar Sesión" />
             </children>
