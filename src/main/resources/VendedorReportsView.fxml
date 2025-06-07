@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="800.0"
+      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.cerrajeria.app.ui.controllers.VendedorReportsController"
+      spacing="10.0">
+    <padding>
+        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+    </padding>
+    <children>
+        <Label text="Mis Reportes">
+            <font><Font name="System Bold" size="24.0"/></font>
+        </Label>
+        <TabPane VBox.vgrow="ALWAYS">
+            <tabs>
+                <Tab text="Ventas">
+                    <TableView fx:id="salesTable">
+                        <columns>
+                            <TableColumn fx:id="colSaleId" text="ID" prefWidth="80.0"/>
+                            <TableColumn fx:id="colSaleDate" text="Fecha" prefWidth="160.0"/>
+                            <TableColumn fx:id="colSaleTotal" text="Total" prefWidth="100.0"/>
+                        </columns>
+                        <columnResizePolicy>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                        </columnResizePolicy>
+                    </TableView>
+                </Tab>
+                <Tab text="Comisiones">
+                    <TableView fx:id="commissionsTable">
+                        <columns>
+                            <TableColumn fx:id="colComId" text="ID" prefWidth="80.0"/>
+                            <TableColumn fx:id="colComAmount" text="Monto" prefWidth="100.0"/>
+                            <TableColumn fx:id="colComState" text="Estado" prefWidth="100.0"/>
+                            <TableColumn fx:id="colComDate" text="Fecha" prefWidth="160.0"/>
+                        </columns>
+                        <columnResizePolicy>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                        </columnResizePolicy>
+                    </TableView>
+                </Tab>
+            </tabs>
+        </TabPane>
+        <Button text="Refrescar" onAction="#handleRefresh"/>
+    </children>
+</VBox>

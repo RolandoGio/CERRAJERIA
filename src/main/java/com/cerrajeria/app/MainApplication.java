@@ -76,15 +76,19 @@ public class MainApplication extends Application {
      * Método placeholder para mostrar el Dashboard del Vendedor.
      * En el futuro, cargará el FXML del dashboard del vendedor.
      * @throws IOException Si el archivo FXML no se puede cargar.
+     * Muestra el dashboard para usuarios con rol Vendedor.
      */
     public static void showVendedorDashboard() throws IOException {
         System.out.println("Navegando al Dashboard del Vendedor... (Falta implementación de la vista)");
-         //Cuando implementes esta vista, el FXML podría estar en:
+        //Cuando implementes esta vista, el FXML podría estar en:
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("/VendedorDashboardView.fxml"));
-         Scene scene = new Scene(fxmlLoader.load());
-         primaryStage.setScene(scene);
+        Scene scene = new Scene(fxmlLoader.load());
+        primaryStage.setScene(scene);
+
         primaryStage.show();
-         primaryStage.centerOnScreen();
+        primaryStage.centerOnScreen();
+        primaryStage.centerOnScreen();
+        System.out.println("Dashboard de Vendedor cargado");
     }
 
     /**

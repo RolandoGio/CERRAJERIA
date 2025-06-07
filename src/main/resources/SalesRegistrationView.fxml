@@ -110,5 +110,6 @@
                 </SplitPane>
             </children>
         </VBox>
+
     </children>
 </AnchorPane>

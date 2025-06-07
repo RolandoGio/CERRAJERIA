@@ -32,14 +32,14 @@ public class VendedorDashboardController {
 
     @FXML
     private void handleCommissionsSection(ActionEvent event) {
-        System.out.println("Sección de comisiones seleccionada. (TODO: implementar vista)");
-        // TODO: load commissions view when available
+        System.out.println("Navegando a Mis Comisiones...");
+        loadFXMLIntoContentArea("/VendedorCommissionsView.fxml");
     }
 
     @FXML
     private void handleReportsSection(ActionEvent event) {
-        System.out.println("Sección de reportes seleccionada. (TODO: implementar vista)");
-        // TODO: load reports view when available
+        System.out.println("Navegando a Mis Reportes...");
+        loadFXMLIntoContentArea("/VendedorReportsView.fxml");
     }
 
     @FXML

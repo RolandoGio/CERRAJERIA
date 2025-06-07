@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="800.0"
+      xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.cerrajeria.app.ui.controllers.VendedorCommissionsController"
+      spacing="10.0">
+    <padding>
+        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+    </padding>
+    <children>
+        <Label text="Mis Comisiones">
+            <font>
+                <Font name="System Bold" size="24.0"/>
+            </font>
+        </Label>
+
+        <!-- Tabla de comisiones -->
+        <TableView fx:id="commissionsTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colId" text="ID" prefWidth="60.0"/>
+                <TableColumn fx:id="colVenta" text="Venta" prefWidth="120.0"/>
+                <TableColumn fx:id="colServicio" text="Servicio" prefWidth="120.0"/>
+                <TableColumn fx:id="colMonto" text="Monto" prefWidth="80.0"/>
+                <TableColumn fx:id="colEstado" text="Estado" prefWidth="80.0"/>
+                <TableColumn fx:id="colComentario" text="Comentario Vendedor" prefWidth="150.0"/>
+                <TableColumn fx:id="colComentarioAdmin" text="Comentario Admin" prefWidth="150.0"/>
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+
+        <!-- Área para editar comentario del vendedor -->
+        <HBox spacing="10.0" alignment="CENTER_LEFT">
+            <Label text="Comentario vendedor:"/>
+            <TextArea fx:id="comentarioField" prefRowCount="2" prefWidth="200.0"/>
+            <Button fx:id="updateButton" text="Actualizar" onAction="#handleActualizarComentario"/>
+            <Button fx:id="deleteButton" text="Desactivar" onAction="#handleEliminarComision"/>
+            <Button text="Refrescar" onAction="#handleRefresh"/>
+        </HBox>
+
+        <!-- Área para ver comentario del administrador -->
+        <HBox spacing="10.0" alignment="CENTER_LEFT">
+            <Label text="Comentario admin:"/>
+            <TextArea fx:id="comentarioAdminField" prefRowCount="2" prefWidth="300.0" editable="false"/>
+        </HBox>
+
+        <Label fx:id="messageLabel" textFill="red" visible="false"/>
+    </children>
+</VBox>
